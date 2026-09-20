@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOURDER | Sign In</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #fdfdfd;
+      color: #1a1a1a;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .brand-logo {
+      font-weight: 900;
+      font-size: 32px;
+      letter-spacing: -1.5px;
+      color: #0084ff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: "Arial Black", -apple-system, sans-serif;
+      margin-bottom: 24px;
+    }
+
+    .auth-card {
+      background: #ffffff;
+      border: 1px solid #eaeaea;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      width: 100%;
+      max-width: 440px;
+      padding: 36px 32px;
+    }
+
+    .auth-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .auth-subtitle {
+      font-size: 0.95rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-group input {
+      padding: 12px 42px 12px 14px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+      width: 100%;
+    }
+
+    .form-group input:focus {
+      border-color: #0084ff;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: #666;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .toggle-password:hover {
+      color: #0084ff;
+    }
+
+    .error-msg {
+      color: #ff4757;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: -12px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .rules-list {
+      list-style: none;
+      margin-bottom: 20px;
+      background: #f9f9f9;
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid #eee;
+    }
+
+    .rule-item {
+      font-size: 0.85rem;
+      color: #777;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .rule-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .rule-item.valid {
+      color: #2ed573;
+      font-weight: 600;
+    }
+
+    .rule-item.invalid {
+      color: #ff4757;
+    }
+
+    .rule-icon {
+      font-weight: bold;
+    }
+
+    .btn-action {
+      background: #0084ff;
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      border-radius: 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+
+    .btn-action:hover {
+      background: #006ddb;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      color: #666;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 16px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .back-btn:hover {
+      color: #0084ff;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="brand-logo">TOURDER</a>
+
+  <div class="auth-card">
+    <h1 class="auth-title">Welcome</h1>
+    <p class="auth-subtitle">Enter your credentials to access your profile.</p>
+
+    <form id="auth-form" action="welcome.html" method="GET">
+      
+      <div class="form-step active" id="step-email">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Email Address" autocomplete="off">
+        </div>
+        <div class="error-msg" id="email-error">Invalid email format. Try again.</div>
+        <button type="button" class="btn-action" id="btn-next">Continue</button>
+      </div>
+
+      <div class="form-step" id="step-password">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="password" name="password" placeholder="Password">
+            <button type="button" class="toggle-password" id="btn-toggle-pass" aria-label="Toggle password visibility">👁️</button>
+          </div>
+        </div>
+
+        <ul class="rules-list">
+          <li class="rule-item" id="rule-length">
+            <span class="rule-icon">✕</span> At least 8 characters
+          </li>
+          <li class="rule-item" id="rule-number">
+            <span class="rule-icon">✕</span> At least 1 number (0-9)
+          </li>
+          <li class="rule-item" id="rule-special">
+            <span class="rule-icon">✕</span> At least 1 special character (!@#$%^&*)
+          </li>
+          <li class="rule-item" id="rule-uppercase">
+            <span class="rule-icon">✕</span> At least 1 uppercase letter
+          </li>
+        </ul>
+
+        <button type="submit" class="btn-action" id="btn-submit">Enter TOURDER</button>
+        <button type="button" class="back-btn" id="btn-back">← Change Email</button>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    const emailStep = document.getElementById('step-email');
+    const passwordStep = document.getElementById('step-password');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const emailError = document.getElementById('email-error');
+    
+    const btnNext = document.getElementById('btn-next');
+    const btnBack = document.getElementById('btn-back');
+    const authForm = document.getElementById('auth-form');
+    const btnTogglePass = document.getElementById('btn-toggle-pass');
+
+    const ruleLength = document.getElementById('rule-length');
+    const ruleNumber = document.getElementById('rule-number');
+    const ruleSpecial = document.getElementById('rule-special');
+    const ruleUppercase = document.getElementById('rule-uppercase');
+
+    function validateEmail(email) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
+
+    btnNext.addEventListener('click', function() {
+      const emailValue = emailInput.value.trim();
+      if (!validateEmail(emailValue)) {
+        emailError.style.display = 'block';
+        emailInput.style.borderColor = '#ff4757';
+      } else {
+        emailError.style.display = 'none';
+        emailInput.style.borderColor = '#cccccc';
+        emailStep.classList.remove('active');
+        passwordStep.classList.add('active');
+      }
+    });
+
+    btnBack.addEventListener('click', function() {
+      passwordStep.classList.remove('active');
+      emailStep.classList.add('active');
+    });
+
+    btnTogglePass.addEventListener('click', function() {
+      const isPassword = passwordInput.getAttribute('type') === 'password';
+      passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+      this.textContent = isPassword ? '🙈' : '👁️';
+    });
+
+    passwordInput.addEventListener('input', function() {
+      const val = this.value;
+
+      const isLength = val.length >= 8;
+      const isNumber = /\d/.test(val);
+      const isSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(val);
+      const isUppercase = /[A-Z]/.test(val);
+
+      updateRuleUI(ruleLength, isLength);
+      updateRuleUI(ruleNumber, isNumber);
+      updateRuleUI(ruleSpecial, isSpecial);
+      updateRuleUI(ruleUppercase, isUppercase);
+    });
+
+    function updateRuleUI(element, isValid) {
+      const icon = element.querySelector('.rule-icon');
+      if (isValid) {
+        element.classList.add('valid');
+        element.classList.remove('invalid');
+        icon.textContent = '✓';
+      } else {
+        element.classList.remove('valid');
+        element.classList.add('invalid');
+        icon.textContent = '✕';
+      }
+    }
+
+    authForm.addEventListener('submit', function(event) {
+      const val = passwordInput.value;
+      const isLength = val.length >= 8;
+      const isNumber = /\d/.test(val);
+      const isSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(val);
+      const isUppercase = /[A-Z]/.test(val);
+
+      if (!isLength || !isNumber || !isSpecial || !isUppercase) {
+        event.preventDefault();
+      }
+    });
+  </script>
+
+</body>
+</html>

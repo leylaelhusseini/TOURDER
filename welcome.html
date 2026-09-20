@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOURDER | Edit Profile</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #fdfdfd;
+      color: #1a1a1a;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .brand-logo {
+      font-weight: 900;
+      font-size: 32px;
+      letter-spacing: -1.5px;
+      color: #0084ff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: "Arial Black", -apple-system, sans-serif;
+      margin-bottom: 24px;
+    }
+
+    .profile-card {
+      background: #ffffff;
+      border: 1px solid #eaeaea;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      width: 100%;
+      max-width: 520px;
+      padding: 36px 32px;
+    }
+
+    .profile-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .avatar-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .avatar-preview {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      color: #757575;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      border: 2px dashed #cccccc;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .avatar-upload-btn {
+      font-size: 0.85rem;
+      color: #0084ff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .avatar-upload-btn:hover {
+      text-decoration: underline;
+    }
+
+    #avatar-file {
+      display: none;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px 14px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #0084ff;
+    }
+
+    .interests-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .btn-submit {
+      background: #0084ff;
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      border-radius: 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 12px;
+      transition: background 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: #006ddb;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #666;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: #0084ff;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="brand-logo">TOURDER</a>
+
+  <div class="profile-card">
+    <h1 class="profile-title">Edit Profile</h1>
+
+    <div class="avatar-container">
+      <div class="avatar-preview" id="avatar-display">?</div>
+      <label for="avatar-file" class="avatar-upload-btn">Upload Custom Photo</label>
+      <input type="file" id="avatar-file" accept="image/*">
+    </div>
+
+    <form id="profile-form" action="tourder.html" method="GET">
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name">
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username">
+      </div>
+
+      <div class="form-group">
+        <label for="bio">About Me (Bio)</label>
+        <textarea id="bio" name="bio" placeholder="Write a short bio about yourself and your territory goals..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="occupation">Occupation / Title</label>
+        <input type="text" id="occupation" name="occupation" placeholder="e.g. Sovereign Ruler, Diplomat, Island Buyer">
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" placeholder="Enter your age">
+      </div>
+
+      <div class="form-group">
+        <label>Land Types You Want</label>
+        <div class="interests-options">
+          <label class="checkbox-label">
+            <input type="checkbox" name="interests" value="no-taxes"> Tax Free
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="interests" value="islands"> Private Islands
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="interests" value="castles"> Castles
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="interests" value="micro-states"> Small States
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="interests" value="forts"> Coastal Forts
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="interests" value="forests"> Forests
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="interests" value="oases"> Desert Oases
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="interests" value="mountains"> Mountains
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="region">Preferred Location</label>
+        <select id="region" name="region">
+          <option value="" disabled selected>Select Location</option>
+          <option value="international-waters">International Waters</option>
+          <option value="tropical-islands">Tropical Islands</option>
+          <option value="europe">European Countryside</option>
+          <option value="desert">Desert & Oasis</option>
+          <option value="arctic">Arctic & Snow</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit">Save Profile Changes</button>
+    </form>
+
+    <a href="tourder.html" class="back-link">← Back to swiping</a>
+  </div>
+
+  <script>
+    const fullnameInput = document.getElementById('fullname');
+    const usernameInput = document.getElementById('username');
+    const ageInput = document.getElementById('age');
+    const regionSelect = document.getElementById('region');
+    const avatarDisplay = document.getElementById('avatar-display');
+    const avatarFile = document.getElementById('avatar-file');
+
+    const colors = ['#0084ff', '#ff4757', '#2ed573', '#ffa502', '#3742fa', '#70a1ff', '#e84393'];
+
+    function updateAvatar(name) {
+      if (name && name.trim().length > 0 && !avatarDisplay.style.backgroundImage) {
+        const firstLetter = name.trim().charAt(0).toUpperCase();
+        avatarDisplay.textContent = firstLetter;
+        avatarDisplay.style.borderStyle = 'solid';
+        
+        const charCode = firstLetter.charCodeAt(0);
+        const colorIndex = charCode % colors.length;
+        avatarDisplay.style.backgroundColor = colors[colorIndex];
+        avatarDisplay.style.color = '#ffffff';
+      } else if (!avatarDisplay.style.backgroundImage) {
+        avatarDisplay.textContent = '?';
+        avatarDisplay.style.backgroundColor = '#e0e0e0';
+        avatarDisplay.style.color = '#757575';
+        avatarDisplay.style.borderStyle = 'dashed';
+      }
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const paramFullname = urlParams.get('fullname');
+    if (paramFullname) {
+      fullnameInput.value = paramFullname;
+      updateAvatar(paramFullname);
+    }
+
+    const paramUsername = urlParams.get('username');
+    if (paramUsername) {
+      usernameInput.value = paramUsername;
+    }
+
+    const paramAge = urlParams.get('age');
+    if (paramAge) {
+      ageInput.value = paramAge;
+    }
+
+    const paramRegion = urlParams.get('region');
+    if (paramRegion) {
+      regionSelect.value = paramRegion;
+    }
+
+    const paramInterests = urlParams.getAll('interests');
+    if (paramInterests && paramInterests.length > 0) {
+      paramInterests.forEach(val => {
+        const checkbox = document.querySelector(`input[name="interests"][value="${val}"]`);
+        if (checkbox) checkbox.checked = true;
+      });
+    }
+
+    fullnameInput.addEventListener('input', function() {
+      updateAvatar(this.value);
+    });
+
+    avatarFile.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          avatarDisplay.style.backgroundImage = `url('${e.target.result}')`;
+          avatarDisplay.textContent = '';
+          avatarDisplay.style.borderStyle = 'solid';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>
